@@ -1,0 +1,39 @@
+body{
+    background-color: cadetblue;
+}
+
+.main{
+    height: 100%;
+    width: 100%;
+}
+
+.bloco{
+    position: absolute;
+    background-color: gold;
+    border-color: goldenrod;
+    border-style: solid;
+    height: 50px;
+    width: 50px;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.campo{
+    background-color: sandybrown;
+    border-color: peru;
+    border-style: solid;
+    height: calc(100% - 20px);
+    width: 45%;
+    position: absolute;
+    left: 50%;
+    z-index: 1;
+}
+
+.mensagem{
+    position: absolute;
+    color: yellow;
+}
+
+.hide{
+    display: none;
+}
