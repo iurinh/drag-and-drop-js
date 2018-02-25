@@ -3,9 +3,7 @@ body{
 }
 
 .main{
-    position: absolute;
-    height: 100%;
-    width: 100%;
+    float: left;
 }
 
 .bloco{
@@ -22,9 +20,8 @@ body{
     border-style: solid;
     height: calc(100% - 20px);
     width: 45%;
-    position: fixed;
-    left: 50%;
     z-index: -1;
+    float: right;
 }
 
 .campo-hover{
