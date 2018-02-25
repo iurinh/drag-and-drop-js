@@ -3,18 +3,16 @@ body{
 }
 
 .main{
+    position: absolute;
     height: 100%;
     width: 100%;
 }
 
 .bloco{
-    position: absolute;
     background-color: gold;
-    border-color: goldenrod;
-    border-style: solid;
+    border: 3px solid goldenrod;
     height: 50px;
     width: 50px;
-    z-index: 2;
     overflow: hidden;
 }
 
@@ -24,9 +22,9 @@ body{
     border-style: solid;
     height: calc(100% - 20px);
     width: 45%;
-    position: absolute;
+    position: fixed;
     left: 50%;
-    z-index: 1;
+    z-index: -1;
 }
 
 .campo-hover{
@@ -41,4 +39,12 @@ body{
 
 .hide{
     display: none;
+}
+
+.absolute{
+    position: absolute;
+}
+
+.elevar{
+    z-index: 3;
 }
