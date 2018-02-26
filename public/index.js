@@ -15,7 +15,7 @@ function adicionarMovimento(component){
 
         component.addEventListener('mousemove', service.mover);
 
-        event.stopPropagation();
+        service.mover(event, component);
     });
 
     component.addEventListener('touchstart', function(event){
@@ -23,26 +23,20 @@ function adicionarMovimento(component){
         component.classList.add('elevar');
 
         component.addEventListener('touchmove', service.mover);
-
-        event.stopPropagation();
     });
 
     component.addEventListener('mouseup', function(event){
         component.classList.remove('elevar');
 
         component.removeEventListener('mousemove', service.mover);
-        validarPosicaoFinal(event);
-
-        event.stopPropagation();
+        validarPosicaoFinal(component, event);
     });
 
     component.addEventListener('touchend', function(event){
         component.classList.remove('elevar');
 
         component.removeEventListener('touchmove', service.mover);
-        validarPosicaoFinal(event);
-
-        event.stopPropagation();
+        validarPosicaoFinal(component, event);
     });
 }
 
@@ -58,11 +52,19 @@ function inspecinarCursor(){
 }
 
 // Funcionalidades
-function validarPosicaoFinal(event){
-    if(service.estaDentro(campo, event)) 
+function validarPosicaoFinal(component, event){
+    if(service.estaDentro(campo, event)) {
         mensagem.classList.remove('hide');
-    else 
+        campo.appendChild(component);
+    } else {
         mensagem.classList.add('hide');
+        component.classList.add('absolute');
+        body.appendChild(component);
+    }
+
+    component.classList.remove('absolute');
+    component.style.top = '';
+    component.style.left = '';
 }
 
 function validarMovimentoCursor(event){

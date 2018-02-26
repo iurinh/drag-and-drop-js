@@ -4,10 +4,11 @@ var service = {
 }
 
 /** Atribui posicao do mouse como centro do componente (Realizando deslocamento) */
-function _mover(event){
-    
-    this.style.top = ((event.clientY || event.changedTouches[0].clientY) - (this.scrollHeight/2)) + "px";
-    this.style.left = ((event.clientX || event.changedTouches[0].clientX) - (this.scrollWidth/2)) + "px";
+function _mover(event, component){
+    var obj = component || this;
+
+    obj.style.top = ((event.clientY || event.changedTouches[0].clientY) - (obj.scrollHeight/2)) + "px";
+    obj.style.left = ((event.clientX || event.changedTouches[0].clientX) - (obj.scrollWidth/2)) + "px";
 
 }
 

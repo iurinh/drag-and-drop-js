@@ -6,6 +6,10 @@ body{
     float: left;
 }
 
+.component{
+    float: left;
+}
+
 .bloco{
     background-color: gold;
     border: 3px solid goldenrod;
