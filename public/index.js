@@ -4,8 +4,8 @@
 var body = document.querySelector('body');
 var blocos = document.querySelectorAll('#bloco');
 var tiras = document.querySelectorAll('#tira');
-var campo = document.querySelector('.campo');
-var mensagem = document.querySelector('.mensagem');
+var campo = document.querySelector('#campo');
+var mensagem = document.querySelector('#mensagem');
 
 /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
 function adicionarMovimento(component){
@@ -54,10 +54,8 @@ function inspecinarCursor(){
 // Funcionalidades
 function validarPosicaoFinal(component, event){
     if(service.estaDentro(campo, event)) {
-        mensagem.classList.remove('hide');
-        campo.appendChild(component);
+        campo.appendChild(component);        
     } else {
-        mensagem.classList.add('hide');
         component.classList.add('absolute');
         body.appendChild(component);
     }
@@ -65,6 +63,8 @@ function validarPosicaoFinal(component, event){
     component.classList.remove('absolute');
     component.style.top = '';
     component.style.left = '';
+
+    contar(campo);
 }
 
 function validarMovimentoCursor(event){
@@ -72,6 +72,21 @@ function validarMovimentoCursor(event){
         campo.classList.add('campo-hover');
     else
         campo.classList.remove('campo-hover');
+}
+
+function contar(component){
+    var unidades = 0;
+    var dezenas = 0;
+
+    component.querySelectorAll('#bloco').forEach(function(bloco){
+        unidades++;
+    });
+
+    component.querySelectorAll('#tira').forEach(function(tira){
+        dezenas++;
+    });
+
+    mensagem.innerHTML = (dezenas * 10) + unidades;
 }
 
 // Inicializadores
