@@ -13,33 +13,35 @@ function adicionarMovimento(component){
         component.classList.add('absolute');
         component.classList.add('elevar');
 
-        body.addEventListener('mousemove', function(event){
-            service.mover(event, component);
-        });
+        body.addEventListener('mousemove', mover);
 
-        service.mover(event, component);
+        mover(event);
     });
 
     component.addEventListener('touchstart', function(event){
         component.classList.add('absolute');
         component.classList.add('elevar');
 
-        component.addEventListener('touchmove', service.mover);
+        component.addEventListener('touchmove', mover);
     });
 
     component.addEventListener('mouseup', function(event){
         component.classList.remove('elevar');
 
-        body.removeEventListener('mousemove', service.mover);
+        body.removeEventListener('mousemove', mover);
         validarPosicaoFinal(component, event);
     });
 
     component.addEventListener('touchend', function(event){
         component.classList.remove('elevar');
 
-        component.removeEventListener('touchmove', service.mover);
+        component.removeEventListener('touchmove', mover);
         validarPosicaoFinal(component, event);
     });
+
+    function mover(event){
+        service.mover(event, component);
+    }
 }
 
 /** Eventos gerais do mouse sobre a tela */
