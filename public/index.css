@@ -15,7 +15,6 @@ body{
     border: 3px solid goldenrod;
     height: 50px;
     width: 50px;
-    overflow: hidden;
 }
 
 .campo{
@@ -47,4 +46,8 @@ body{
 
 .elevar{
     z-index: 3;
+}
+
+.transicao{
+    transition-duration: 2s;
 }

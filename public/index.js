@@ -13,7 +13,9 @@ function adicionarMovimento(component){
         component.classList.add('absolute');
         component.classList.add('elevar');
 
-        component.addEventListener('mousemove', service.mover);
+        body.addEventListener('mousemove', function(event){
+            service.mover(event, component);
+        });
 
         service.mover(event, component);
     });
@@ -28,7 +30,7 @@ function adicionarMovimento(component){
     component.addEventListener('mouseup', function(event){
         component.classList.remove('elevar');
 
-        component.removeEventListener('mousemove', service.mover);
+        body.removeEventListener('mousemove', service.mover);
         validarPosicaoFinal(component, event);
     });
 
