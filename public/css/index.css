@@ -1,4 +1,5 @@
 body{
+    overscroll-behavior-y: contain;
     background-color: cadetblue;
 }
 

@@ -1,0 +1,11 @@
+CACHE MANIFEST
+
+#v5
+
+CACHE: 
+css/index.css
+js/app/index.js
+js/app/service.js
+
+NETWORK:
+*

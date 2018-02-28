@@ -1,6 +1,8 @@
-<html>
+<html lang="pt-br" manifest="offline.manifest">
     <head>
-        <link rel="stylesheet" type="text/css" href="index.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="manifest" href="app.manifest">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
     </head>
     <body>
         <h1 id="mensagem" class='mensagem'>Vamos contar</h1>
@@ -22,8 +24,9 @@
 
         <div id="campo" class="campo"></div>
 
-            <script type="text/javascript" src="service.js"></script>
-            <script type="text/javascript" src="index.js"></script>
+            <script type="text/javascript" src="js/sw/register.js"></script>
+            <script type="text/javascript" src="js/app/service.js"></script>
+            <script type="text/javascript" src="js/app/index.js"></script>
         
     </body>
 </html>
