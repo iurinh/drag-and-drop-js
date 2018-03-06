@@ -2,9 +2,12 @@
 
 // Componentes de tela
 var body = document.querySelector('body');
+var panelStop = document.querySelector('#panel-stop');
 var blocos = document.querySelectorAll('#bloco');
 var tiras = document.querySelectorAll('#tira');
-var campo = document.querySelector('#campo');
+var campoFinal = document.querySelector('#campo-final');
+var campoBloco = document.querySelector('#campo-bloco');
+var campoTira = document.querySelector('#campo-tira');
 var mensagem = document.querySelector('#mensagem');
 
 /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
@@ -57,25 +60,59 @@ function inspecinarCursor(){
 
 // Funcionalidades
 function validarPosicaoFinal(component, event){
-    if(service.estaDentro(campo, event)) {
-        campo.appendChild(component);        
+    if(service.estaDentro(campoFinal, event)) {
+        campoFinal.appendChild(component);
+
+        adicionarComponentPosicaoInicial(component);
     } else {
-        component.classList.add('absolute');
-        body.appendChild(component);
+        voltaPosicaoInicial(component);
+        removerComponentPosicaoInicial(component);
     }
+    
+    component.style.top = 'unset';
+    component.style.left = 'unset';
 
-    component.classList.remove('absolute');
-    component.style.top = '';
-    component.style.left = '';
+    contar(campoFinal);
+}
 
-    contar(campo);
+function voltaPosicaoInicial(component){
+    let tipo = component.tipo;
+
+    if(tipo === 'bloco') campoBloco.appendChild(component);
+    else if(tipo === 'tira') campoTira.appendChild(component);
+    else if(tipo === 'plataforma') campoPlataforma.appendChild(component);
+}
+
+function adicionarComponentPosicaoInicial(component){
+    let tipo = component.tipo;
+
+    let clone = component.cloneNode(true);
+    clone.tipo = tipo;
+    clone.classList.remove('absolute');
+
+    adicionarMovimento(clone);
+    campoFinal.appendChild(clone);
+
+    voltaPosicaoInicial(component);
+}
+
+function removerComponentPosicaoInicial(component){
+    let tipo = component.tipo;
+    let campo;
+
+    if(tipo === 'bloco') campo = campoBloco;
+    else if(tipo === 'tira') campo = campoTira;
+    else if(tipo === 'plataforma') campo = campoPlataforma;
+
+    if(campo.querySelectorAll('#'+tipo).length && campo.querySelectorAll('#'+tipo)[0] != component)
+        component.remove();
 }
 
 function validarMovimentoCursor(event){
-    if(service.estaDentro(campo, event))
-        campo.classList.add('campo-hover');
+    if(service.estaDentro(campoFinal, event))
+        campoFinal.classList.add('campo-final-hover');
     else
-        campo.classList.remove('campo-hover');
+        campoFinal.classList.remove('campo-final-hover');
 }
 
 function contar(component){
@@ -93,13 +130,31 @@ function contar(component){
     mensagem.innerHTML = (dezenas * 10) + unidades;
 }
 
+function verificarPosicaoTela(){
+    window.addEventListener('resize', function(){
+        verificarPosicaoTela();
+    });
+
+    function verificarPosicaoTela(){        
+        if(document.body.scrollHeight > document.body.scrollWidth)
+            panelStop.classList.remove('hide');
+        else
+            panelStop.classList.add('hide');
+    }
+
+    verificarPosicaoTela();
+}
+
 // Inicializadores
 blocos.forEach(function(bloco){
+    bloco.tipo = 'bloco';
     adicionarMovimento(bloco); 
 });
 
 tiras.forEach(function(tira){
+    tira.tipo = 'tira';
     adicionarMovimento(tira); 
 });
 
 inspecinarCursor();
+verificarPosicaoTela();
