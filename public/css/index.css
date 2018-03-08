@@ -55,33 +55,15 @@ main{
     width: 100%;
 }
 
-.panel-stop{
-    position: fixed;
-    height: 100%;
-    width: 100%;
-    z-index: 2;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.panel-stop h1{
-    color: white;
-}
-
 .hide{
-    display: none;
+    display: none !important;
 }
 
 .absolute{
-    position: absolute;
+    position: absolute !important;
 }
 
 .elevar{
     z-index: 1;
 }
 
-.transicao{
-    transition-duration: 2s;
-}

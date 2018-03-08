@@ -2,7 +2,6 @@
 
 // Componentes de tela
 var body = document.querySelector('body');
-var panelStop = document.querySelector('#panel-stop');
 var blocos = document.querySelectorAll('#bloco');
 var tiras = document.querySelectorAll('#tira');
 var campoFinal = document.querySelector('#campo-final');
@@ -130,21 +129,6 @@ function contar(component){
     mensagem.innerHTML = (dezenas * 10) + unidades;
 }
 
-function verificarPosicaoTela(){
-    window.addEventListener('resize', function(){
-        verificarPosicaoTela();
-    });
-
-    function verificarPosicaoTela(){        
-        if(document.body.scrollHeight > document.body.scrollWidth)
-            panelStop.classList.remove('hide');
-        else
-            panelStop.classList.add('hide');
-    }
-
-    verificarPosicaoTela();
-}
-
 // Inicializadores
 blocos.forEach(function(bloco){
     bloco.tipo = 'bloco';
@@ -157,4 +141,3 @@ tiras.forEach(function(tira){
 });
 
 inspecinarCursor();
-verificarPosicaoTela();
