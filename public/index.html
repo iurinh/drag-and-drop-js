@@ -16,24 +16,13 @@
             <h1 id="mensagem" class='mensagem'>Vamos contar</h1>
             
             <div class="area-alinhada">
-
+                
                 <div id="campo-bloco" class="campo-inicial campo-bloco">
-                    <div id="bloco" class="component bloco"></div>
+                    <bloco></bloco>
                 </div>
         
                 <div id="campo-tira" class="campo-inicial campo-tira">
-                    <div id="tira" class="component tira">
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                        <div class="bloco"></div>
-                    </div>
+                    <tira></tira>
                 </div>
     
                 <div id="campo-plataforma" class="campo-inicial campo-placa"></div>
@@ -44,12 +33,13 @@
         </main>
 
             <!-- <script type="text/javascript" src="js/sw/register.js"></script> -->
-            <script type="text/javascript" src="app/common/service.js"></script>
-            <script type="text/javascript" src="app/common/read-file.service.js"></script>
+            <script type="text/javascript" src="app/common/drag-drop.service.js"></script>
+            <script type="text/javascript" src="app/common/tag.service.js"></script>
+            <script type="text/javascript" src="app/common/file.service.js"></script>
             <script type="text/javascript" src="app/common/html.service.js"></script>
 
             <script type="text/javascript" src="app/main/main.constant.js"></script>
-            <script type="text/javascript" src="app/main/main.route.js"></script>
+            <script type="text/javascript" src="app/main/main.tag.js"></script>
 
             <script type="text/javascript" src="index.js"></script>
     </body>

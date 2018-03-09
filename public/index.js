@@ -1,9 +1,10 @@
-// Variavel service é proveniente do script service.js
+// Variavel dragDropService é proveniente do script dragDropService.js
 
 // Componentes de tela
 var body = document.querySelector('body');
-var blocos = document.querySelectorAll('#bloco');
-var tiras = document.querySelectorAll('#tira');
+var blocos = document.querySelectorAll('bloco');
+var tiras = document.querySelectorAll('tira');
+
 var campoFinal = document.querySelector('#campo-final');
 var campoBloco = document.querySelector('#campo-bloco');
 var campoTira = document.querySelector('#campo-tira');
@@ -42,7 +43,7 @@ function adicionarMovimento(component){
     });
 
     function mover(event){
-        service.mover(event, component);
+        dragDropService.mover(event, component);
     }
 }
 
@@ -59,7 +60,7 @@ function inspecinarCursor(){
 
 // Funcionalidades
 function validarPosicaoFinal(component, event){
-    if(service.estaDentro(campoFinal, event)) {
+    if(dragDropService.estaDentro(campoFinal, event)) {
         campoFinal.appendChild(component);
 
         adicionarComponentPosicaoInicial(component);
@@ -103,12 +104,12 @@ function removerComponentPosicaoInicial(component){
     else if(tipo === 'tira') campo = campoTira;
     else if(tipo === 'plataforma') campo = campoPlataforma;
 
-    if(campo.querySelectorAll('#'+tipo).length && campo.querySelectorAll('#'+tipo)[0] != component)
+    if(campo.querySelectorAll(tipo).length && campo.querySelectorAll(tipo)[0] != component)
         component.remove();
 }
 
 function validarMovimentoCursor(event){
-    if(service.estaDentro(campoFinal, event))
+    if(dragDropService.estaDentro(campoFinal, event))
         campoFinal.classList.add('campo-final-hover');
     else
         campoFinal.classList.remove('campo-final-hover');
@@ -118,11 +119,11 @@ function contar(component){
     var unidades = 0;
     var dezenas = 0;
 
-    component.querySelectorAll('#bloco').forEach(function(bloco){
+    component.querySelectorAll('bloco').forEach(function(bloco){
         unidades++;
     });
 
-    component.querySelectorAll('#tira').forEach(function(tira){
+    component.querySelectorAll('tira').forEach(function(tira){
         dezenas++;
     });
 
@@ -139,5 +140,4 @@ tiras.forEach(function(tira){
     tira.tipo = 'tira';
     adicionarMovimento(tira); 
 });
-
 inspecinarCursor();

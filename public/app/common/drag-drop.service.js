@@ -1,4 +1,4 @@
-var service = {
+var dragDropService = {
     mover: _mover,
     estaDentro: _estaDentro
 }

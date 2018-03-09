@@ -1,4 +1,4 @@
-var readFileService = {
+var fileService = {
     read: _read
 }
 

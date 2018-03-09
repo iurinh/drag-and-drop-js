@@ -12,13 +12,6 @@ main{
     float: left;
 }
 
-.bloco{
-    background-color: gold;
-    border: 3px solid goldenrod;
-    height: 30px;
-    width: 30px;
-}
-
 .campo-final{
     background-color: sandybrown;
     border: 3px solid peru;
@@ -31,10 +24,6 @@ main{
 .campo-final-hover{
     background-color: rgb(168, 127, 91);
     border-color: rgb(156, 110, 65);
-}
-
-.tira .bloco{
-    float: left;
 }
 
 .area-alinhada{
