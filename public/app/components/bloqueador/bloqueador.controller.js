@@ -1,9 +1,7 @@
-var panelStop = document.querySelector('#panel-stop');
+(function BloqueadorController(){
+    var panelStop = document.querySelector('#panel-stop');
 
-function verificarPosicaoTela(){
-    window.addEventListener('resize', function(){
-        verificarPosicaoTela();
-    });
+    window.addEventListener('resize', verificarPosicaoTela);
 
     function verificarPosicaoTela(){        
         if(document.body.scrollHeight > document.body.scrollWidth)
@@ -13,6 +11,4 @@ function verificarPosicaoTela(){
     }
 
     verificarPosicaoTela();
-}
-
-verificarPosicaoTela();
+})();

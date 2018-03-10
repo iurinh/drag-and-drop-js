@@ -1,11 +1,16 @@
 body{
     overscroll-behavior-y: contain;
-    background-color: cadetblue;
+    background-color: black;
+    vertical-align: middle;
+    display: flex;
 }
 
 main{
-    width: 100%;
-    height: 100%;
+    margin: auto;
+    width: var(--largura);
+    height: var(--altura);
+    border: 1px solid #000;
+    background-color: cadetblue;
 }
 
 .component{
