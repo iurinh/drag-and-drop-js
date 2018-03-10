@@ -124,9 +124,9 @@
             unidades++;
         });
 
-        component.querySelectorAll('tira').forEach(function(tira){
-            dezenas++;
-        });
+        // component.querySelectorAll('tira').forEach(function(tira){
+        //     dezenas++;
+        // });
 
         mensagem.innerHTML = (dezenas * 10) + unidades;
     }

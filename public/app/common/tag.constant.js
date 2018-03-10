@@ -1,0 +1,4 @@
+const tags = [
+    'bloco',
+    'tira'
+]
