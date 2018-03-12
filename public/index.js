@@ -5,6 +5,7 @@
     var body = document.querySelector('body');
     var blocos = document.querySelectorAll('bloco');
     var tiras = document.querySelectorAll('tira');
+    var plataformas = document.querySelectorAll('plataformas');
 
     var campoFinal = document.querySelector('#campo-final');
     var campoBloco = document.querySelector('#campo-bloco');
@@ -119,6 +120,7 @@
     function contar(component){
         var unidades = 0;
         var dezenas = 0;
+        var centenas = 0;
 
         component.querySelectorAll('bloco').forEach(function(bloco){
             unidades++;
@@ -127,8 +129,12 @@
         // component.querySelectorAll('tira').forEach(function(tira){
         //     dezenas++;
         // });
+        
+        // component.querySelectorAll('plataforma').forEach(function(plataforma){
+        //     centenas++;
+        // });
 
-        mensagem.innerHTML = (dezenas * 10) + unidades;
+        mensagem.innerHTML = (centenas + 100) + (dezenas * 10) + unidades;
     }
 
     // Inicializadores
@@ -141,6 +147,12 @@
         tira.tipo = 'tira';
         adicionarMovimento(tira); 
     });
+    
+    plataformas.forEach(function(plataforma){
+        plataforma.tipo = 'plataforma';
+        adicionarMovimento(plataforma); 
+    });
+
     inspecinarCursor();
 
     function redimensionar(){

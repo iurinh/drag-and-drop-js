@@ -17,31 +17,10 @@ main{
     float: left;
 }
 
-.campo-final{
-    background-color: sandybrown;
-    border: 3px solid peru;
-    height: 100px;
-    width: 90%;
-    z-index: -1;
-    margin: auto;
-}
-
-.campo-final-hover{
-    background-color: rgb(168, 127, 91);
-    border-color: rgb(156, 110, 65);
-}
-
 .area-alinhada{
     display: inline-flex;
     justify-content: space-around;
     width: 100%;
-}
-
-.campo-inicial{
-    width: 30%;
-    height: 60px;
-    background-color: thistle;
-    box-shadow: 1px 1px 1px;
 }
 
 .mensagem{
@@ -49,15 +28,93 @@ main{
     width: 100%;
 }
 
+/* Auxiliares */
 .hide{
     display: none !important;
 }
-
 .absolute{
     position: absolute !important;
 }
-
 .elevar{
     z-index: 1;
 }
+.left{
+    float: left;
+}
+.hidden{
+    overflow: hidden;
+}
+.inline{
+    display: inline-flex;
+}
 
+/* Campos principais */
+.cabecalho{
+    box-sizing: border-box;
+    height: 20%;
+    width: 100%;
+}
+.resultado{
+    box-sizing: border-box;
+    height: 20%;
+    width: 100%;
+}
+.rodape{
+    box-sizing: border-box;
+    height: 60%;
+    width: 100%;
+}
+.campo-inicial{
+    height: 100%;
+    width: 40%;
+}
+.campo-bloco{
+    box-sizing: border-box;
+    width: calc(100% / 3);
+}
+.campo-tira{
+    box-sizing: border-box;
+    width: calc(100% / 3);
+}
+.campo-plataforma{
+    box-sizing: border-box;
+    width: calc(100% / 3);
+}
+.campo-expressao{
+    height: 100%;
+    width: 60%;
+}
+.campo-resultado{
+    height: 100%;
+    width: calc(100% / 3);
+}
+.texto{
+    font-size: 2em;
+}
+.valor{
+    font-size: 3em;
+}
+.campo-final{
+    box-sizing: border-box;
+    background-color: sandybrown;
+    border: 3px solid peru;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+.campo-final-hover{
+    background-color: rgb(168, 127, 91);
+    border-color: rgb(156, 110, 65);
+}
+.campo-final-centena{
+    height: 100%;
+    width: calc(100% / 3);
+}
+.campo-final-dezena{
+    height: 100%;
+    width: calc(100% / 3);
+}
+.campo-final-unidade{
+    height: 100%;
+    width: calc(100% / 3);
+}

@@ -7,23 +7,69 @@
     </head>
     <body>
         <main>
+            <div id="cabecalho" class="cabecalho inline">
+                <div id="campo-inicial" class="campo-inicial inline hidden">
+            
+                    <div id="campo-bloco" class="campo-bloco left">
+                        <bloco></bloco>
+                    </div>
+            
+                    <div id="campo-tira" class="campo-tira left">
+                        <tira></tira>
+                    </div>
+        
+                    <div id="campo-plataforma" class="campo-plataforma left">
+                        <plataforma></plataforma>
+                    </div>
+    
+                </div>
+
+                <div id="campo-expressao" class="campo-expressao inline">
+                    <p>40</p>
+                    <p>+</p>
+                    <p>5</p>
+                    <p>=</p>
+                </div>
+            </div>
+            <div id="resultado" class="resultado inline">
+                <div id="centena" class="campo-resultado">
+                    <div class="texto">centenas</div>
+                    <div id="valor-centena" class="valor">0</div>
+                    <div id="subiu-centena" class="subiu hide">
+                        <!-- <plataforma class="minimizado"></plataforma> -->
+                    </div>
+                </div>
+                <div id="dezena" class="campo-resultado">
+                    <div class="texto">dezenas</div>
+                    <div id="valor-dezena" class="valor">0</div>
+                    <div id="subiu-dezena" class="subiu hide">
+                        <tira class="minimizado"></tira>
+                    </div>
+                </div>
+                <div id="unidade" class="campo-resultado">
+                    <div class="texto">unidades</div>
+                    <div id="valor-unidade" class="valor">0</div>
+                </div>
+            </div>
+            <div id="rodape" class="rodape">
+                <div id="campo-final" class="campo-final inline campo-final-hover">
+                    <div id="campo-final-centena" class="campo-final-centena">
+            
+                    </div>
+                    <div id="campo-final-dezena" class="campo-final-dezena">
+            
+                    </div>
+                    <div id="campo-final-unidade" class="campo-final-unidade">
+    
+                    </div>
+                </div>
+            </div>
+<!-- 
             <h1 id="mensagem" class='mensagem'>Vamos contar</h1>
             
-            <div class="area-alinhada">
-                
-                <div id="campo-bloco" class="campo-inicial campo-bloco">
-                    <bloco></bloco>
-                </div>
-        
-                <div id="campo-tira" class="campo-inicial campo-tira">
-                    <tira></tira>
-                </div>
-    
-                <div id="campo-plataforma" class="campo-inicial campo-placa"></div>
+            
 
-            </div>
-
-            <div id="campo-final" class="campo-final campo-final-hover"></div>
+            <div id="campo-final" class="campo-final campo-final-hover"></div> -->
 
         </main>
     </body>
