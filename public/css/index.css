@@ -120,20 +120,24 @@ main{
 }
 .bloco{
     background-color: gold;
-    border: 3px solid goldenrod;
+    border: 0.1em solid goldenrod;
     height: 1em;
     width: 1em;
 }
 .tira .bloco{
-    border: 2px solid goldenrod;
+    border: 0.1em solid goldenrod;
     height: 0.4em;
     width: 0.4em;
+}
+.plataforma{
+    height: 4.4em;
+    width: 4.4em;
 }
 .plataforma .tira{
     float: left;
 }
 .plataforma .tira .bloco{
-    border: 1px solid goldenrod;
-    height: 4px;
-    width: 4px;
+    border: 0.07em solid goldenrod;
+    height: 0.3em;
+    width: 0.3em;
 }

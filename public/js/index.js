@@ -11,7 +11,7 @@
     var campoFinal = document.querySelector('#campo-final');
     var campoBloco = document.querySelector('#campo-bloco');
     var campoTira = document.querySelector('#campo-tira');
-    var mensagem = document.querySelector('#mensagem');
+    var campoPlataforma = document.querySelector('#campo-plataforma');
 
     /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
     function adicionarMovimento(component){
@@ -107,7 +107,7 @@
         else if(tipo === 'tira') campo = campoTira;
         else if(tipo === 'plataforma') campo = campoPlataforma;
 
-        if(campo.querySelectorAll(tipo).length && campo.querySelectorAll(tipo)[0] != component)
+        if(campo.querySelectorAll('#'+tipo).length && campo.querySelectorAll('#'+tipo)[0] != component)
             component.remove();
     }
 
@@ -135,7 +135,10 @@
             centenas++;
         });
 
-        mensagem.innerHTML = (centenas + 100) + (dezenas * 10) + unidades;
+        document.querySelector('#valor-unidade').innerHTML = unidades;
+        document.querySelector('#valor-dezena').innerHTML = dezenas;
+        document.querySelector('#valor-centena').innerHTML = centenas;
+
     }
 
     // Inicializadores
