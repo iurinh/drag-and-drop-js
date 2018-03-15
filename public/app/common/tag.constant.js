@@ -1,4 +1,0 @@
-const tags = [
-    'bloco',
-    'tira'
-]

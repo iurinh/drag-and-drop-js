@@ -1,11 +1,12 @@
 (function IndexController(){    
-    // Variavel dragDropService é proveniente do script dragDropService.js
+    
+    tagService.build();
 
     // Componentes de tela
     var body = document.querySelector('body');
-    var blocos = document.querySelectorAll('bloco');
-    var tiras = document.querySelectorAll('tira');
-    var plataformas = document.querySelectorAll('plataformas');
+    var blocos = document.querySelectorAll('#bloco');
+    var tiras = document.querySelectorAll('#tira');
+    var plataformas = document.querySelectorAll('#plataforma');
 
     var campoFinal = document.querySelector('#campo-final');
     var campoBloco = document.querySelector('#campo-bloco');
@@ -122,17 +123,17 @@
         var dezenas = 0;
         var centenas = 0;
 
-        component.querySelectorAll('bloco').forEach(function(bloco){
+        component.querySelectorAll('#bloco').forEach(function(bloco){
             unidades++;
         });
 
-        // component.querySelectorAll('tira').forEach(function(tira){
-        //     dezenas++;
-        // });
+        component.querySelectorAll('#tira').forEach(function(tira){
+            dezenas++;
+        });
         
-        // component.querySelectorAll('plataforma').forEach(function(plataforma){
-        //     centenas++;
-        // });
+        component.querySelectorAll('#plataforma').forEach(function(plataforma){
+            centenas++;
+        });
 
         mensagem.innerHTML = (centenas + 100) + (dezenas * 10) + unidades;
     }

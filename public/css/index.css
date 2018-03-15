@@ -51,7 +51,7 @@ main{
 /* Campos principais */
 .cabecalho{
     box-sizing: border-box;
-    height: 20%;
+    height: 30%;
     width: 100%;
 }
 .resultado{
@@ -61,7 +61,7 @@ main{
 }
 .rodape{
     box-sizing: border-box;
-    height: 60%;
+    height: 50%;
     width: 100%;
 }
 .campo-inicial{
@@ -117,4 +117,23 @@ main{
 .campo-final-unidade{
     height: 100%;
     width: calc(100% / 3);
+}
+.bloco{
+    background-color: gold;
+    border: 3px solid goldenrod;
+    height: 1em;
+    width: 1em;
+}
+.tira .bloco{
+    border: 2px solid goldenrod;
+    height: 0.4em;
+    width: 0.4em;
+}
+.plataforma .tira{
+    float: left;
+}
+.plataforma .tira .bloco{
+    border: 1px solid goldenrod;
+    height: 4px;
+    width: 4px;
 }
