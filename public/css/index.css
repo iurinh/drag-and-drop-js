@@ -51,17 +51,18 @@ main{
 /* Campos principais */
 .cabecalho{
     box-sizing: border-box;
-    height: 30%;
+    height: 25%;
     width: 100%;
 }
 .resultado{
     box-sizing: border-box;
-    height: 20%;
+    height: 16%;
     width: 100%;
 }
 .rodape{
     box-sizing: border-box;
-    height: 50%;
+    padding: 0.5%;
+    height: 59%;
     width: 100%;
 }
 .campo-inicial{
@@ -89,7 +90,7 @@ main{
     width: calc(100% / 3);
 }
 .texto{
-    font-size: 2em;
+    font-size: 1.3em;
 }
 .valor{
     font-size: 3em;
@@ -97,7 +98,6 @@ main{
 .campo-final{
     box-sizing: border-box;
     background-color: sandybrown;
-    border: 3px solid peru;
     height: 100%;
     width: 100%;
     z-index: -1;
@@ -109,14 +109,20 @@ main{
 .campo-final-centena{
     height: 100%;
     width: calc(100% / 3);
+    box-sizing: border-box;
+    border: 0.1em solid peru;
 }
 .campo-final-dezena{
     height: 100%;
     width: calc(100% / 3);
+    box-sizing: border-box;
+    border: 0.1em solid peru;
 }
 .campo-final-unidade{
     height: 100%;
     width: calc(100% / 3);
+    box-sizing: border-box;
+    border: 0.1em solid peru;
 }
 .bloco{
     background-color: gold;
@@ -124,17 +130,17 @@ main{
     height: 1em;
     width: 1em;
 }
+.tira{
+    float: left;
+}
 .tira .bloco{
     border: 0.1em solid goldenrod;
     height: 0.4em;
     width: 0.4em;
 }
 .plataforma{
-    height: 4.4em;
-    width: 4.4em;
-}
-.plataforma .tira{
     float: left;
+    border: 0.1em solid darkgoldenrod;
 }
 .plataforma .tira .bloco{
     border: 0.07em solid goldenrod;
