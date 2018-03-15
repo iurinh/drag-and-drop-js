@@ -75,16 +75,30 @@
         else if(tipo === 'plataforma') campo = campoFinalCentena;
         
         if(dragDropService.estaDentro(campo, event)) {
-            adicionarComponentPosicaoInicial(component, campo);
-        } else {
-            voltaPosicaoInicial(component);
+            adicionarComponentPosicaoFinal(component, campo);
+                    
+            if(tipo === 'plataforma') 
+                if(estaLimiteCentena())
+                    component.remove();
+        } else
             removerComponentPosicaoInicial(component);
-        }
         
         component.style.top = 'unset';
         component.style.left = 'unset';
 
         contar(campoFinal);
+    }
+
+    function adicionarComponentPosicaoFinal(component, campo){
+        let tipo = component.tipo;
+
+        let clone = component.cloneNode(true);
+        clone.tipo = tipo;
+        clone.classList.remove('absolute');
+
+        adicionarMovimento(clone);
+
+        campo.appendChild(clone);
     }
 
     function voltaPosicaoInicial(component){
@@ -95,27 +109,19 @@
         else if(tipo === 'plataforma') campoPlataforma.appendChild(component);
     }
 
-    function adicionarComponentPosicaoInicial(component, campo){
-        let tipo = component.tipo;
-
-        let clone = component.cloneNode(true);
-        clone.tipo = tipo;
-        clone.classList.remove('absolute');
-
-        adicionarMovimento(clone);
-        campo.appendChild(clone);
-
-        voltaPosicaoInicial(component);
-    }
-
     function removerComponentPosicaoInicial(component){
         let tipo = component.tipo;
         let campo;
 
         if(tipo === 'bloco') campo = campoBloco;
         else if(tipo === 'tira') campo = campoTira;
-        else if(tipo === 'plataforma') campo = campoPlataforma;
+        else if(tipo === 'plataforma') {
+            campo = campoPlataforma;
 
+            if(estaLimiteCentena())
+                voltaPosicaoInicial(component);
+        }
+        
         if(campo.querySelectorAll('#'+tipo).length && campo.querySelectorAll('#'+tipo)[0] != component)
             component.remove();
     }
@@ -125,6 +131,10 @@
             campoFinal.classList.add('campo-final-hover');
         else
             campoFinal.classList.remove('campo-final-hover');
+    }
+
+    function estaLimiteCentena(){
+        return campoFinalCentena.querySelectorAll('#plataforma').length >= 9
     }
 
     function contar(component){
