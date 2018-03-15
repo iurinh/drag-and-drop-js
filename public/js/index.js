@@ -8,10 +8,14 @@
     var tiras = document.querySelectorAll('#tira');
     var plataformas = document.querySelectorAll('#plataforma');
 
-    var campoFinal = document.querySelector('#campo-final');
     var campoBloco = document.querySelector('#campo-bloco');
     var campoTira = document.querySelector('#campo-tira');
     var campoPlataforma = document.querySelector('#campo-plataforma');
+    
+    var campoFinal = document.querySelector('#campo-final');
+    var campoFinalUnidade = document.querySelector('#campo-final-unidade');
+    var campoFinalDezena = document.querySelector('#campo-final-dezena');
+    var campoFinalCentena = document.querySelector('#campo-final-centena');
 
     /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
     function adicionarMovimento(component){
@@ -63,10 +67,15 @@
 
     // Funcionalidades
     function validarPosicaoFinal(component, event){
-        if(dragDropService.estaDentro(campoFinal, event)) {
-            campoFinal.appendChild(component);
+        let tipo = component.tipo;
+        let campo;
 
-            adicionarComponentPosicaoInicial(component);
+        if(tipo === 'bloco') campo = campoFinalUnidade;
+        else if(tipo === 'tira') campo = campoFinalDezena;
+        else if(tipo === 'plataforma') campo = campoFinalCentena;
+        
+        if(dragDropService.estaDentro(campo, event)) {
+            adicionarComponentPosicaoInicial(component, campo);
         } else {
             voltaPosicaoInicial(component);
             removerComponentPosicaoInicial(component);
@@ -86,7 +95,7 @@
         else if(tipo === 'plataforma') campoPlataforma.appendChild(component);
     }
 
-    function adicionarComponentPosicaoInicial(component){
+    function adicionarComponentPosicaoInicial(component, campo){
         let tipo = component.tipo;
 
         let clone = component.cloneNode(true);
@@ -94,7 +103,7 @@
         clone.classList.remove('absolute');
 
         adicionarMovimento(clone);
-        campoFinal.appendChild(clone);
+        campo.appendChild(clone);
 
         voltaPosicaoInicial(component);
     }
