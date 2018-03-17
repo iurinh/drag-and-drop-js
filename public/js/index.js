@@ -4,6 +4,7 @@
 
     // Componentes de tela
     var body = document.querySelector('body');
+
     var blocos = document.querySelectorAll('#bloco');
     var tiras = document.querySelectorAll('#tira');
     var plataformas = document.querySelectorAll('#plataforma');
@@ -16,56 +17,6 @@
     var campoFinalUnidade = document.querySelector('#campo-final-unidade');
     var campoFinalDezena = document.querySelector('#campo-final-dezena');
     var campoFinalCentena = document.querySelector('#campo-final-centena');
-
-    /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
-    function adicionarMovimento(component){
-        component.addEventListener('mousedown', function(event){
-            component.classList.add('absolute');
-            component.classList.add('elevar');
-
-            body.addEventListener('mousemove', mover);
-
-            mover(event);
-        });
-
-        component.addEventListener('touchstart', function(event){
-            component.classList.add('absolute');
-            component.classList.add('elevar');
-
-            component.addEventListener('touchmove', mover);
-        });
-
-        component.addEventListener('mouseup', function(event){
-            component.classList.remove('absolute');
-            component.classList.remove('elevar');
-
-            body.removeEventListener('mousemove', mover);
-            validarPosicaoFinal(component, event);
-        });
-
-        component.addEventListener('touchend', function(event){
-            component.classList.remove('absolute');
-            component.classList.remove('elevar');
-
-            component.removeEventListener('touchmove', mover);
-            validarPosicaoFinal(component, event);
-        });
-
-        function mover(event){
-            dragDropService.mover(event, component);
-        }
-    }
-
-    /** Eventos gerais do mouse sobre a tela */
-    function inspecinarCursor(){
-        body.addEventListener('mousemove', function(event){
-            validarMovimentoCursor(event);
-        });
-
-        body.addEventListener('touchmove', function(event){
-            validarMovimentoCursor(event);
-        });
-    }
 
     // Funcionalidades
     function validarPosicaoFinal(component, event){
@@ -114,7 +65,7 @@
         clone.tipo = tipo;
         clone.classList.remove('absolute');
 
-        adicionarMovimento(clone);
+        dragDropService.adicionarMovimento(body, clone);
 
         campo.appendChild(clone);
     }
@@ -142,13 +93,6 @@
         
         if(campo.querySelectorAll('#'+tipo).length && campo.querySelectorAll('#'+tipo)[0] != component)
             component.remove();
-    }
-
-    function validarMovimentoCursor(event){
-        if(dragDropService.estaDentro(campoFinal, event))
-            campoFinal.classList.add('campo-final-hover');
-        else
-            campoFinal.classList.remove('campo-final-hover');
     }
 
     function estaLimiteCentena(){
@@ -181,20 +125,26 @@
     // Inicializadores
     blocos.forEach(function(bloco){
         bloco.tipo = 'bloco';
-        adicionarMovimento(bloco); 
+        dragDropService.adicionarMovimento(body, bloco, validarPosicaoFinal); 
     });
 
     tiras.forEach(function(tira){
         tira.tipo = 'tira';
-        adicionarMovimento(tira); 
+        dragDropService.adicionarMovimento(body, tira, validarPosicaoFinal); 
     });
     
     plataformas.forEach(function(plataforma){
         plataforma.tipo = 'plataforma';
-        adicionarMovimento(plataforma); 
+        dragDropService.adicionarMovimento(body, plataforma, validarPosicaoFinal); 
     });
 
-    inspecinarCursor();
-    telaService.redimensionar();
+    function validarMovimentoCursor(event){
+        if(dragDropService.estaDentro(campoFinal, event))
+            campoFinal.classList.add('campo-final-hover');
+        else
+            campoFinal.classList.remove('campo-final-hover');
+    }
 
+    dragDropService.inspecinarCursor(body, validarMovimentoCursor);
+    telaService.redimensionar();
 })();
