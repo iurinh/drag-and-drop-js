@@ -20,7 +20,7 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
-    var limiteCasaDecimal = 0;
+    var limiteCasaDecimal = 9;
 
     // Funcionalidades
     function validarPosicaoFinal(component, event){
