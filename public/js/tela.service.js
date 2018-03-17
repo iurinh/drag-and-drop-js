@@ -58,5 +58,5 @@ function _redimensionar(){
         }
     }
     
-    return setRootClass().size;
+    setRootClass().size;
 }
