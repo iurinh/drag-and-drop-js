@@ -38,6 +38,7 @@ function _estaDentro(component, event){
 /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
 function _adicionarMovimento(field, component, callBack){
     component.addEventListener('mousedown', function(event){
+        document.activeElement.blur();
         component.classList.add('absolute');
         component.classList.add('elevar');
 
