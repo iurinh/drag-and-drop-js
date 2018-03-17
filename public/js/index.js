@@ -36,6 +36,7 @@
         });
 
         component.addEventListener('mouseup', function(event){
+            component.classList.remove('absolute');
             component.classList.remove('elevar');
 
             body.removeEventListener('mousemove', mover);
@@ -43,6 +44,7 @@
         });
 
         component.addEventListener('touchend', function(event){
+            component.classList.remove('absolute');
             component.classList.remove('elevar');
 
             component.removeEventListener('touchmove', mover);
@@ -67,6 +69,8 @@
 
     // Funcionalidades
     function validarPosicaoFinal(component, event){
+        var jaPossui = possuiComponente(campoFinal, component);
+
         let tipo = component.tipo;
         let campo;
 
@@ -75,7 +79,8 @@
         else if(tipo === 'plataforma') campo = campoFinalCentena;
         
         if(dragDropService.estaDentro(campo, event)) {
-            adicionarComponentPosicaoFinal(component, campo);
+            if(!jaPossui)
+                adicionarComponentPosicaoFinal(component, campo);
                     
             if(tipo === 'plataforma') 
                 if(estaLimiteCentena())
@@ -85,8 +90,21 @@
         
         component.style.top = 'unset';
         component.style.left = 'unset';
-
+    
         contar(campoFinal);
+    }
+
+    function possuiComponente(field, component){
+        var components = field.querySelectorAll('#' + component.getAttribute("id"));
+        if(components.length){
+            var has = false
+            
+            components.forEach(function(node){
+                has = has || (node == component);
+            })
+        }
+
+        return has;
     }
 
     function adicionarComponentPosicaoFinal(component, campo){
