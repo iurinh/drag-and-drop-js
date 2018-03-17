@@ -17,23 +17,35 @@
     var campoFinalUnidade = document.querySelector('#campo-final-unidade');
     var campoFinalDezena = document.querySelector('#campo-final-dezena');
     var campoFinalCentena = document.querySelector('#campo-final-centena');
+    var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
+    var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
+
+    var limiteCasaDecimal = 0;
 
     // Funcionalidades
     function validarPosicaoFinal(component, event){
         var jaPossui = possuiComponente(campoFinal, component);
 
-        let tipo = component.tipo;
+        let id = component.getAttribute("id");
         let campo;
 
-        if(tipo === 'bloco') campo = campoFinalUnidade;
-        else if(tipo === 'tira') campo = campoFinalDezena;
-        else if(tipo === 'plataforma') campo = campoFinalCentena;
+        if(id === 'bloco') campo = campoFinalUnidade;
+        else if(id === 'tira') campo = campoFinalDezena;
+        else if(id === 'plataforma') campo = campoFinalCentena;
+        else if(id === 'tira-minimizada') return;
+        else if(id === 'plataforma-minimizada') return;
         
         if(dragDropService.estaDentro(campo, event)) {
-            if(!jaPossui)
+            if(!jaPossui){
                 adicionarComponentPosicaoFinal(component, campo);
+
+                if(campo.querySelectorAll('#' + id).length > limiteCasaDecimal && !(id === 'tira-minimizada' || id === 'plataforma-minimizada')){
+                    campo.innerHTML = "";
+                    adicionarComponentSubiu(id);
+                }
+            }
                     
-            if(tipo === 'plataforma') 
+            if(id === 'plataforma') 
                 if(estaLimiteCentena())
                     component.remove();
         } else
@@ -43,6 +55,21 @@
         component.style.left = 'unset';
     
         contar(campoFinal);
+    }
+
+    function adicionarComponentSubiu(id){
+        var component = '';
+        
+        if(id === 'bloco'){
+            component = tagService.getComponentTiraMinimizada();
+            campoSubiuDezena.appendChild(component);
+        } else if(id === 'tira'){
+            component = tagService.getComponentPlataformaMinimizada();
+            campoSubiuCentena.appendChild(component);
+        } else 
+            return;
+
+        dragDropService.adicionarMovimento(body, component, validarPosicaoFinal); 
     }
 
     function possuiComponente(field, component){
@@ -59,39 +86,40 @@
     }
 
     function adicionarComponentPosicaoFinal(component, campo){
-        let tipo = component.tipo;
-
         let clone = component.cloneNode(true);
-        clone.tipo = tipo;
         clone.classList.remove('absolute');
 
-        dragDropService.adicionarMovimento(body, clone);
+        dragDropService.adicionarMovimento(body, clone, validarPosicaoFinal);
 
         campo.appendChild(clone);
     }
 
     function voltaPosicaoInicial(component){
-        let tipo = component.tipo;
+        let id = component.getAttribute("id");
 
-        if(tipo === 'bloco') campoBloco.appendChild(component);
-        else if(tipo === 'tira') campoTira.appendChild(component);
-        else if(tipo === 'plataforma') campoPlataforma.appendChild(component);
+        if(id === 'bloco') campoBloco.appendChild(component);
+        else if(id === 'tira') campoTira.appendChild(component);
+        else if(id === 'plataforma') campoPlataforma.appendChild(component);
+        else if(id === 'tira-minimizada') campoSubiuDezena.appendChild(component);
+        else if(id === 'plataforma-minimizada') campoSubiuCentena.appendChild(component);;
     }
 
     function removerComponentPosicaoInicial(component){
-        let tipo = component.tipo;
+        let id = component.getAttribute("id");
         let campo;
 
-        if(tipo === 'bloco') campo = campoBloco;
-        else if(tipo === 'tira') campo = campoTira;
-        else if(tipo === 'plataforma') {
+        if(id === 'bloco') campo = campoBloco;
+        else if(id === 'tira') campo = campoTira;
+        else if(id === 'plataforma') {
             campo = campoPlataforma;
 
             if(estaLimiteCentena())
                 voltaPosicaoInicial(component);
         }
+        else if(id === 'tira-minimizada') campo = campoSubiuDezena;
+        else if(id === 'plataforma-minimizada') campo = campoSubiuCentena;
         
-        if(campo.querySelectorAll('#'+tipo).length && campo.querySelectorAll('#'+tipo)[0] != component)
+        if(campo.querySelectorAll('#'+id).length && campo.querySelectorAll('#'+id)[0] != component)
             component.remove();
     }
 
@@ -124,17 +152,14 @@
 
     // Inicializadores
     blocos.forEach(function(bloco){
-        bloco.tipo = 'bloco';
         dragDropService.adicionarMovimento(body, bloco, validarPosicaoFinal); 
     });
 
     tiras.forEach(function(tira){
-        tira.tipo = 'tira';
         dragDropService.adicionarMovimento(body, tira, validarPosicaoFinal); 
     });
     
     plataformas.forEach(function(plataforma){
-        plataforma.tipo = 'plataforma';
         dragDropService.adicionarMovimento(body, plataforma, validarPosicaoFinal); 
     });
 
