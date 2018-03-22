@@ -102,7 +102,7 @@ main{
     width: 100%;
     z-index: -1;
 }
-.campo-final-hover{
+.campo-hover{
     background-color: rgb(168, 127, 91);
     border-color: rgb(156, 110, 65);
 }

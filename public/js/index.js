@@ -20,10 +20,10 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
-    var limiteCasaDecimal = 9;
+    var limiteCasaDecimal = 1;
 
     // Funcionalidades
-    function validarPosicaoFinal(component, event){
+    function validarPosicaoFinal(field, component, event){
         var jaPossui = possuiComponente(campoFinal, component);
 
         let id = component.getAttribute("id");
@@ -32,8 +32,14 @@
         if(id === 'bloco') campo = campoFinalUnidade;
         else if(id === 'tira') campo = campoFinalDezena;
         else if(id === 'plataforma') campo = campoFinalCentena;
-        else if(id === 'tira-minimizada') return;
-        else if(id === 'plataforma-minimizada') return;
+        else if(id === 'tira-minimizada'){
+            campo = campoFinalDezena;
+            component = tagService.getComponentTira();
+        }
+        else if(id === 'plataforma-minimizada'){
+            campo = campoFinalCentena;
+            component = tagService.getComponentPlataforma();
+        }
         
         if(dragDropService.estaDentro(campo, event)) {
             if(!jaPossui){
@@ -55,6 +61,7 @@
         component.style.left = 'unset';
     
         contar(campoFinal);
+        field.classList.remove('campo-hover');
     }
 
     function adicionarComponentSubiu(id){
@@ -63,13 +70,14 @@
         if(id === 'bloco'){
             component = tagService.getComponentTiraMinimizada();
             campoSubiuDezena.appendChild(component);
+
+            dragDropService.adicionarMovimento(campoFinalDezena, component, validarPosicaoFinal, cursorSobreCampo);
         } else if(id === 'tira'){
             component = tagService.getComponentPlataformaMinimizada();
             campoSubiuCentena.appendChild(component);
-        } else 
-            return;
 
-        dragDropService.adicionarMovimento(body, component, validarPosicaoFinal); 
+            dragDropService.adicionarMovimento(campoFinalCentena, component, validarPosicaoFinal, cursorSobreCampo);
+        }
     }
 
     function possuiComponente(field, component){
@@ -89,7 +97,11 @@
         let clone = component.cloneNode(true);
         clone.classList.remove('absolute');
 
-        dragDropService.adicionarMovimento(body, clone, validarPosicaoFinal);
+        let id = component.getAttribute("id");
+
+        if(id === 'bloco') dragDropService.adicionarMovimento(campoFinalUnidade, clone, validarPosicaoFinal, cursorSobreCampo);
+        else if(id === 'tira') dragDropService.adicionarMovimento(campoFinalDezena, clone, validarPosicaoFinal, cursorSobreCampo);
+        else if(id === 'plataforma') dragDropService.adicionarMovimento(campoFinalCentena, clone, validarPosicaoFinal, cursorSobreCampo);
 
         campo.appendChild(clone);
     }
@@ -152,24 +164,23 @@
 
     // Inicializadores
     blocos.forEach(function(bloco){
-        dragDropService.adicionarMovimento(body, bloco, validarPosicaoFinal); 
+        dragDropService.adicionarMovimento(campoFinalUnidade, bloco, validarPosicaoFinal, cursorSobreCampo);
     });
 
     tiras.forEach(function(tira){
-        dragDropService.adicionarMovimento(body, tira, validarPosicaoFinal); 
+        dragDropService.adicionarMovimento(campoFinalDezena, tira, validarPosicaoFinal, cursorSobreCampo);
     });
     
     plataformas.forEach(function(plataforma){
-        dragDropService.adicionarMovimento(body, plataforma, validarPosicaoFinal); 
+        dragDropService.adicionarMovimento(campoFinalCentena, plataforma, validarPosicaoFinal, cursorSobreCampo);
     });
 
-    function validarMovimentoCursor(event){
-        if(dragDropService.estaDentro(campoFinal, event))
-            campoFinal.classList.add('campo-final-hover');
+    function cursorSobreCampo(field, event){
+        if(dragDropService.estaDentro(field, event))
+            field.classList.add('campo-hover');
         else
-            campoFinal.classList.remove('campo-final-hover');
+            field.classList.remove('campo-hover');
     }
 
-    dragDropService.inspecinarCursor(body, validarMovimentoCursor);
     telaService.redimensionar();
 })();

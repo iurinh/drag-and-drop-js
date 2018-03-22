@@ -1,10 +1,13 @@
 var tagService = {
     build: _build,
     getBloco: _getBloco,
+    getComponentBloco: _getComponentBloco,
     getTira: _getTira,
+    getComponentTira: _getComponentTira,
     getTiraMinimizada: _getTiraMinimizada,
     getComponentTiraMinimizada: _getComponentTiraMinimizada,
     getPlataforma: _getPlataforma,
+    getComponentPlataforma: _getComponentPlataforma,
     getPlataformaMinimizada: _getPlataformaMinimizada,
     getComponentPlataformaMinimizada: _getComponentPlataformaMinimizada
 }
@@ -12,7 +15,7 @@ var tagService = {
 function _build(){
     var html = document.querySelector('html');
 
-    var innerText = html. innerHTML;
+    var innerText = html.innerHTML;
 
     innerText = innerText.replace(new RegExp('<plataforma></plataforma>', 'g'), _getPlataforma());
     innerText = innerText.replace(new RegExp('<tira></tira>', 'g'), _getTira());
@@ -27,6 +30,19 @@ function _build(){
 
 function _getBloco(){
     return '<div class="bloco"></div>'
+}
+
+function _getComponentBloco(){
+    var component = document.createElement('div');
+    var innerText = component.innerHTML;
+
+    innerText = _getBloco();
+
+    innerText = innerText.replace('<div class="bloco">', '<div id="bloco" class="bloco">');
+
+    component.innerHTML = innerText;
+
+    return component.children[0];
 }
 
 function _getTira(){
@@ -44,6 +60,21 @@ function _getTira(){
         + '</div>'
 }
 
+function _getComponentTira(){
+    var component = document.createElement('div');
+    var innerText = component.innerHTML;
+
+    innerText = _getTira();
+
+    innerText = innerText.replace(new RegExp('<bloco></bloco>', 'g'), _getBloco());
+
+    innerText = innerText.replace('<div class="tira">', '<div id="tira" class="tira">');
+
+    component.innerHTML = innerText;
+
+    return component.children[0];
+}
+
 function _getPlataforma(){
     return '<div class="plataforma">'
         + '<tira></tira>'
@@ -57,6 +88,22 @@ function _getPlataforma(){
         + '<tira></tira>'
         + '<tira></tira>'
         + '</div>'
+}
+
+function _getComponentPlataforma(){
+    var component = document.createElement('div');
+    var innerText = component.innerHTML;
+
+    innerText = _getPlataforma();
+
+    innerText = innerText.replace(new RegExp('<tira></tira>', 'g'), _getTira());
+    innerText = innerText.replace(new RegExp('<bloco></bloco>', 'g'), _getBloco());
+
+    innerText = innerText.replace('<div class="plataforma">', '<div id="plataforma" class="plataforma">');
+
+    component.innerHTML = innerText;
+
+    return component.children[0];
 }
 
 function _getTiraMinimizada(){

@@ -36,13 +36,15 @@ function _estaDentro(component, event){
 }
 
 /** Adiciona evento para os componentes de tela que funcionarão como drag-and-drop */
-function _adicionarMovimento(field, component, callBack){
+function _adicionarMovimento(field, component, endFunction, moveFunction){
+    var body = document.body;
+
     component.addEventListener('mousedown', function(event){
         document.activeElement.blur();
         component.classList.add('absolute');
         component.classList.add('elevar');
 
-        field.addEventListener('mousemove', mover);
+        body.addEventListener('mousemove', mover);
 
         mover(event);
     });
@@ -58,8 +60,10 @@ function _adicionarMovimento(field, component, callBack){
         component.classList.remove('absolute');
         component.classList.remove('elevar');
 
-        field.removeEventListener('mousemove', mover);
-        callBack(component, event);
+        body.removeEventListener('mousemove', mover);
+
+        if(endFunction)
+            endFunction(field, component, event);
     });
 
     component.addEventListener('touchend', function(event){
@@ -67,11 +71,16 @@ function _adicionarMovimento(field, component, callBack){
         component.classList.remove('elevar');
 
         component.removeEventListener('touchmove', mover);
-        callBack(component, event);
+        
+        if(endFunction)
+            endFunction(field, component, event);
     });
 
     function mover(event){
         _mover(event, component);
+
+        if(moveFunction)
+            moveFunction(field, event);
     }
     
 }
