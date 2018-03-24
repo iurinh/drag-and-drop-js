@@ -83,15 +83,22 @@ main{
 }
 .campo-expressao{
     height: 100%;
-    width: 50%;
+    width: 40%;
 }
 .campo-lixeira{
+    height: 100%;
+    width: 10%;
+}
+.campo-refresh{
     height: 100%;
     width: 10%;
 }
 .campo-resultado{
     height: 100%;
     width: calc(100% / 3);
+}
+.refresh{
+    float: right;
 }
 .texto{
     font-size: 1.3em;

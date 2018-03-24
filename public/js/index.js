@@ -18,7 +18,9 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
-    var limiteCasaDecimal = 1;
+    var refreshButton = document.querySelector('#refresh');
+
+    var limiteCasaDecimal = 9;
 
     // Funcionalidades
     function validarPosicaoFinal(field, componentMovimentado, event){
@@ -218,4 +220,22 @@
     }
 
     telaService.redimensionar();
+
+    refreshButton.addEventListener('mousedown', function(event){
+        limparCampos();
+        contar(campoFinal);
+    });
+
+    refreshButton.addEventListener('touchstart', function(event){
+        limparCampos();
+        contar(campoFinal);
+    });
+
+    function limparCampos(){
+        campoFinalUnidade.innerHTML = '';
+        campoFinalDezena.innerHTML = '';
+        campoFinalCentena.innerHTML = '';
+        campoSubiuDezena.innerHTML = '';
+        campoSubiuCentena.innerHTML = '';
+    }
 })();
