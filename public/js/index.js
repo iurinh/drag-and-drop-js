@@ -18,6 +18,7 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
+    var clearButton = document.querySelector('#clear');
     var refreshButton = document.querySelector('#refresh');
 
     var limiteCasaDecimal = 9;
@@ -237,13 +238,23 @@
         campoSubiuCentena.innerHTML = '';
     }
 
-    refreshButton.addEventListener('mousedown', function(event){
+    clearButton.addEventListener('mousedown', function(event){
         limparCampos();
         contar(campoFinal);
     });
 
-    refreshButton.addEventListener('touchstart', function(event){
+    clearButton.addEventListener('touchstart', function(event){
         limparCampos();
+        contar(campoFinal);
+    });
+
+    refreshButton.addEventListener('mousedown', function(event){
+        gerarExpressao();
+        contar(campoFinal);
+    });
+
+    refreshButton.addEventListener('touchstart', function(event){
+        gerarExpressao();
         contar(campoFinal);
     });
 
@@ -263,7 +274,7 @@
     }
 
     function gerarNumero(){
-        return parseInt(Math.random() * 100);
+        return parseInt(Math.random() * 1000) - 1;
     }
 
     telaService.redimensionar();
