@@ -22,6 +22,10 @@
 
     var limiteCasaDecimal = 9;
 
+    var primeiraParcela = 0;
+    var segundaParcela = 0
+    var resultadoFinal = 0;
+
     // Funcionalidades
     function validarPosicaoFinal(field, componentMovimentado, event){
         var id = componentMovimentado.getAttribute("id");
@@ -197,6 +201,12 @@
         document.querySelector('#valor-dezena').innerHTML = dezenas;
         document.querySelector('#valor-centena').innerHTML = centenas;
 
+        var resultado = (centenas * 100) + (dezenas * 10) + unidades;
+
+        if(resultadoFinal == resultado)
+            document.querySelector('#resultado').innerHTML = resultadoFinal;
+        else
+            document.querySelector('#resultado').innerHTML = '';
     }
 
     // Inicializadores
@@ -219,7 +229,13 @@
             field.classList.remove('campo-hover');
     }
 
-    telaService.redimensionar();
+    function limparCampos(){
+        campoFinalUnidade.innerHTML = '';
+        campoFinalDezena.innerHTML = '';
+        campoFinalCentena.innerHTML = '';
+        campoSubiuDezena.innerHTML = '';
+        campoSubiuCentena.innerHTML = '';
+    }
 
     refreshButton.addEventListener('mousedown', function(event){
         limparCampos();
@@ -231,11 +247,25 @@
         contar(campoFinal);
     });
 
-    function limparCampos(){
-        campoFinalUnidade.innerHTML = '';
-        campoFinalDezena.innerHTML = '';
-        campoFinalCentena.innerHTML = '';
-        campoSubiuDezena.innerHTML = '';
-        campoSubiuCentena.innerHTML = '';
+    function gerarExpressao(){
+        primeiraParcela = gerarNumero();
+        segundaParcela = gerarNumero();
+        
+        resultadoFinal = primeiraParcela + segundaParcela;
+
+        if(resultadoFinal > 999){
+            gerarExpressao();
+            return;
+        }
+
+        document.querySelector('#primeira-parcela').innerHTML = primeiraParcela;
+        document.querySelector('#segunda-parcela').innerHTML = segundaParcela;
     }
+
+    function gerarNumero(){
+        return parseInt(Math.random() * 100);
+    }
+
+    telaService.redimensionar();
+    gerarExpressao();
 })();
