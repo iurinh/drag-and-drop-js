@@ -83,7 +83,11 @@ main{
 }
 .campo-expressao{
     height: 100%;
-    width: 60%;
+    width: 50%;
+}
+.campo-lixeira{
+    height: 100%;
+    width: 10%;
 }
 .campo-resultado{
     height: 100%;

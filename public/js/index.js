@@ -18,11 +18,16 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
-    var limiteCasaDecimal = 9;
+    var limiteCasaDecimal = 1;
 
     // Funcionalidades
     function validarPosicaoFinal(field, componentMovimentado, event){
         var id = componentMovimentado.getAttribute("id");
+
+        if(dragDropService.estaDentro(document.querySelector('#lixeira'), event) && (id === 'tira-minimizada' || id === 'plataforma-minimizada')){
+            componentMovimentado.remove();
+            return;
+        }
         
         var componentCriado;
         if(id === 'tira-minimizada'){
