@@ -3,8 +3,6 @@
     tagService.build();
 
     // Componentes de tela
-    var body = document.querySelector('body');
-
     var blocos = document.querySelectorAll('#bloco');
     var tiras = document.querySelectorAll('#tira');
     var plataformas = document.querySelectorAll('#plataforma');
@@ -20,7 +18,7 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
-    var limiteCasaDecimal = 1;
+    var limiteCasaDecimal = 9;
 
     // Funcionalidades
     function validarPosicaoFinal(field, component, event){
@@ -51,9 +49,16 @@
                 }
             }
                     
-            if(id === 'plataforma') 
+            if(id === 'plataforma'){
                 if(estaLimiteCentena())
                     component.remove();
+            } else if(id === 'tira-minimizada'){
+                if(document.querySelectorAll('#tira-minimizada').length)
+                    document.querySelectorAll('#tira-minimizada')[0].remove();
+            } else if(id === 'plataforma-minimizada'){
+                if(document.querySelectorAll('#plataforma-minimizada').length)
+                    document.querySelectorAll('#plataforma-minimizada')[0].remove();
+            }
         } else
             removerComponentPosicaoInicial(component);
         
