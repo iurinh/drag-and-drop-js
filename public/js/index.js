@@ -18,52 +18,61 @@
     var campoSubiuDezena = document.querySelector('#campo-subiu-dezena');
     var campoSubiuCentena = document.querySelector('#campo-subiu-centena');
 
-    var limiteCasaDecimal = 9;
+    var limiteCasaDecimal = 2;
 
     // Funcionalidades
-    function validarPosicaoFinal(field, component, event){
-        var jaPossui = possuiComponente(campoFinal, component);
-
-        let id = component.getAttribute("id");
-        let campo;
-
-        if(id === 'bloco') campo = campoFinalUnidade;
-        else if(id === 'tira') campo = campoFinalDezena;
-        else if(id === 'plataforma') campo = campoFinalCentena;
-        else if(id === 'tira-minimizada'){
-            campo = campoFinalDezena;
-            component = tagService.getComponentTira();
-        }
-        else if(id === 'plataforma-minimizada'){
-            campo = campoFinalCentena;
-            component = tagService.getComponentPlataforma();
+    function validarPosicaoFinal(field, componentMovimentado, event){
+        var id = componentMovimentado.getAttribute("id");
+        
+        var componentCriado;
+        if(id === 'tira-minimizada'){
+            componentCriado = tagService.getComponentTira();
+            id = 'tira';
+        } else if(id === 'plataforma-minimizada'){
+            componentCriado = tagService.getComponentPlataforma();
+            id = 'plataforma';
         }
         
-        if(dragDropService.estaDentro(campo, event)) {
-            if(!jaPossui){
-                adicionarComponentPosicaoFinal(component, campo);
+        var jaPossui = possuiComponente(field, componentCriado || componentMovimentado);
+                
+        if(dragDropService.estaDentro(field, event)) {
+            if(estaLimiteSubiuDezena() && id === 'bloco' && estaLimiteUnidade()){
+                console.log('Você já usou muitas unidades. Resolva antes a casa das dezenas.');
+                field.classList.remove('campo-hover');
+                return;
+            }
 
-                if(campo.querySelectorAll('#' + id).length > limiteCasaDecimal && !(id === 'tira-minimizada' || id === 'plataforma-minimizada')){
-                    campo.innerHTML = "";
+            if(estaLimiteSubiuCentena() && id === 'tira' && estaLimiteDezena()){
+                console.log('Você já usou muitas dezenas. Resolva antes a casa das centenas.');
+                field.classList.remove('campo-hover');
+                return;
+            }
+
+            if(componentCriado && id === 'plataforma' && estaLimiteCentena()){
+                console.log('Nesse jogo, não usaremos valores com mais de ' + limiteCasaDecimal + ' centenas.');
+                field.classList.remove('campo-hover');
+                return;
+            }
+
+            if(!jaPossui){
+                adicionarComponentPosicaoFinal(componentCriado || componentMovimentado, field);
+
+                if(field.querySelectorAll('#' + id).length > limiteCasaDecimal){
+                    field.innerHTML = "";
                     adicionarComponentSubiu(id);
                 }
             }
-                    
-            if(id === 'plataforma'){
-                if(estaLimiteCentena())
-                    component.remove();
-            } else if(id === 'tira-minimizada'){
-                if(document.querySelectorAll('#tira-minimizada').length)
-                    document.querySelectorAll('#tira-minimizada')[0].remove();
-            } else if(id === 'plataforma-minimizada'){
-                if(document.querySelectorAll('#plataforma-minimizada').length)
-                    document.querySelectorAll('#plataforma-minimizada')[0].remove();
-            }
+            
+            if(id === 'plataforma' && estaLimiteCentena())
+                componentMovimentado.remove();
+           
+            if(componentCriado)
+                componentMovimentado.remove();
         } else
-            removerComponentPosicaoInicial(component);
+            removerComponentPosicaoInicial(componentMovimentado);
         
-        component.style.top = 'unset';
-        component.style.left = 'unset';
+        componentMovimentado.style.top = 'unset';
+        componentMovimentado.style.left = 'unset';
     
         contar(campoFinal);
         field.classList.remove('campo-hover');
@@ -99,10 +108,10 @@
     }
 
     function adicionarComponentPosicaoFinal(component, campo){
-        let clone = component.cloneNode(true);
+        var clone = component.cloneNode(true);
         clone.classList.remove('absolute');
 
-        let id = component.getAttribute("id");
+        var id = component.getAttribute("id");
 
         if(id === 'bloco') dragDropService.adicionarMovimento(campoFinalUnidade, clone, validarPosicaoFinal, cursorSobreCampo);
         else if(id === 'tira') dragDropService.adicionarMovimento(campoFinalDezena, clone, validarPosicaoFinal, cursorSobreCampo);
@@ -112,7 +121,7 @@
     }
 
     function voltaPosicaoInicial(component){
-        let id = component.getAttribute("id");
+        var id = component.getAttribute("id");
 
         if(id === 'bloco') campoBloco.appendChild(component);
         else if(id === 'tira') campoTira.appendChild(component);
@@ -122,8 +131,8 @@
     }
 
     function removerComponentPosicaoInicial(component){
-        let id = component.getAttribute("id");
-        let campo;
+        var id = component.getAttribute("id");
+        var campo;
 
         if(id === 'bloco') campo = campoBloco;
         else if(id === 'tira') campo = campoTira;
@@ -140,8 +149,24 @@
             component.remove();
     }
 
+    function estaLimiteUnidade(){
+        return campoFinalUnidade.querySelectorAll('#bloco').length >= limiteCasaDecimal;
+    }
+
+    function estaLimiteDezena(){
+        return campoFinalDezena.querySelectorAll('#tira').length >= limiteCasaDecimal;
+    }
+
     function estaLimiteCentena(){
-        return campoFinalCentena.querySelectorAll('#plataforma').length >= 9
+        return campoFinalCentena.querySelectorAll('#plataforma').length >= limiteCasaDecimal;
+    }
+
+    function estaLimiteSubiuDezena(){
+        return campoSubiuDezena.querySelectorAll('#tira-minimizada').length >= limiteCasaDecimal;
+    }
+
+    function estaLimiteSubiuCentena(){
+        return campoSubiuCentena.querySelectorAll('#plataforma-minimizada').length >= limiteCasaDecimal;
     }
 
     function contar(component){
