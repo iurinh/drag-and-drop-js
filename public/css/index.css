@@ -212,3 +212,12 @@ main, .main{
     border-radius: 10%;
     margin: auto;
 }
+
+.popup{
+    margin-top: calc(50% - 50px);
+    margin-left: calc(50% - 150px);
+    height: 100px;
+    width: 300px;
+    background-color: white;
+    position: absolute;
+}

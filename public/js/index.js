@@ -51,19 +51,19 @@
                 
         if(dragDropService.estaDentro(field, event)) {
             if(estaLimiteSubiuDezena() && id === 'bloco' && estaLimiteUnidade()){
-                console.log('Você já usou muitas unidades. Resolva antes a casa das dezenas.');
+                mostrarMensagem('Você já usou muitas unidades. Resolva antes a casa das dezenas.');
                 field.classList.remove('campo-hover');
                 return;
             }
 
             if(estaLimiteSubiuCentena() && id === 'tira' && estaLimiteDezena()){
-                console.log('Você já usou muitas dezenas. Resolva antes a casa das centenas.');
+                mostrarMensagem('Você já usou muitas dezenas. Resolva antes a casa das centenas.');
                 field.classList.remove('campo-hover');
                 return;
             }
 
             if(componentCriado && id === 'plataforma' && estaLimiteCentena()){
-                console.log('Nesse jogo, não usaremos valores com mais de ' + limiteCasaDecimal + ' centenas.');
+                mostrarMensagem('Nesse jogo, não usaremos valores com mais de ' + limiteCasaDecimal + ' centenas.');
                 field.classList.remove('campo-hover');
                 return;
             }
@@ -290,6 +290,14 @@
         contar(campoFinal);
         document.querySelector('#tela-parabens').classList.add('hide');
     });
+
+    function mostrarMensagem(msg){
+        document.querySelector('#mensagem').innerHTML = msg;
+        document.querySelector('#popup').classList.remove('hide');
+        setTimeout(function(){
+            document.querySelector('#popup').classList.add('hide');
+        }, 4000);
+    }
 
     telaService.redimensionar();
     gerarExpressao();
