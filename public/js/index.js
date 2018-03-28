@@ -20,6 +20,8 @@
 
     var clearButton = document.querySelector('#clear');
     var refreshButton = document.querySelector('#refresh');
+    var initButton = document.querySelector('#botao-somar');
+    var newGameButton = document.querySelector('#botao-novo-jogo');
 
     var limiteCasaDecimal = 9;
 
@@ -204,9 +206,10 @@
 
         var resultado = (centenas * 100) + (dezenas * 10) + unidades;
 
-        if(resultadoFinal == resultado)
+        if(resultadoFinal == resultado){
             document.querySelector('#resultado').innerHTML = resultadoFinal;
-        else
+            document.querySelector('#tela-parabens').classList.remove('hide');
+        } else
             document.querySelector('#resultado').innerHTML = '';
     }
 
@@ -276,6 +279,17 @@
     function gerarNumero(){
         return parseInt(Math.random() * 1000) - 1;
     }
+
+    initButton.addEventListener('mousedown', function(){
+        document.querySelector('#tela-inicial').classList.add('hide');
+    });
+
+    newGameButton.addEventListener('mousedown', function(){
+        limparCampos();
+        gerarExpressao();
+        contar(campoFinal);
+        document.querySelector('#tela-parabens').classList.add('hide');
+    });
 
     telaService.redimensionar();
     gerarExpressao();
