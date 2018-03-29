@@ -62,7 +62,7 @@
                 return;
             }
 
-            if(componentCriado && id === 'plataforma' && estaLimiteCentena()){
+            if(id === 'plataforma' && estaLimiteCentena()){
                 mostrarMensagem('Nesse jogo, não usaremos valores com mais de ' + limiteCasaDecimal + ' centenas.');
                 field.classList.remove('campo-hover');
                 return;
@@ -77,9 +77,6 @@
                 }
             }
             
-            if(id === 'plataforma' && estaLimiteCentena())
-                componentMovimentado.remove();
-           
             if(componentCriado)
                 componentMovimentado.remove();
         } else
@@ -234,6 +231,9 @@
     }
 
     function limparCampos(){
+        if(estaLimiteCentena())
+            
+
         campoFinalUnidade.innerHTML = '';
         campoFinalDezena.innerHTML = '';
         campoFinalCentena.innerHTML = '';
