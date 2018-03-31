@@ -3,6 +3,11 @@
     --borda-bloco: calc(var(--largura) * 0.001);
 }
 
+@font-face {
+    font-family: Soft_Marshmallow;
+    src: url('../font/Soft_Marshmallow.otf');
+}
+
 body{
     overscroll-behavior-y: contain;
     background-color: black;
@@ -105,11 +110,11 @@ main{
 }
 .texto{
     font-size: calc(var(--altura) * 0.05);
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: "Soft_Marshmallow";
 }
 .valor{
     font-size: calc(var(--altura) * 0.12);
-    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-family: "Soft_Marshmallow";
 }
 .campo-final{
     width: 100%;
