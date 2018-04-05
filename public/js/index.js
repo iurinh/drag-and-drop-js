@@ -208,7 +208,9 @@
         var resultado = (centenas * 100) + (dezenas * 10) + unidades;
 
         if(resultadoFinal == resultado){
-            document.querySelector('#resultado').innerHTML = resultadoFinal;
+            document.querySelectorAll('#resultado').forEach(function(res){
+                res.innerHTML = resultadoFinal;
+            });
             show('#tela-parabens');
             hide('main');
         } else
@@ -360,7 +362,7 @@
     gerarExpressao();
 
     hide('main');
-    hide('#tela-parabens')
+    hide('#tela-parabens');
     hide('#audio-ambiente');
 
 })();

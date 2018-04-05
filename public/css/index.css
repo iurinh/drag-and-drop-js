@@ -248,6 +248,22 @@ main{
     text-shadow: 0 0 3px goldenrod;
 }
 
+.titulo-parabens{
+    animation: gold-color-frames 2s infinite;
+    text-align: center;
+    height: 50%;
+    padding: 2em;
+    box-sizing: border-box;
+    font-size: var(--tamanho-fonte-titulo);
+    text-shadow: 0 0 3px goldenrod;
+    transform: translateX(-15%) translateY(-10%) rotate(-30deg);
+}
+
+.resultado-parabens{
+    transform: translateY(-85%);
+    text-align: center;
+}
+
 .botao-tela-inicial{
     height: var(--altura-botao-titulo);
     width: var(--largura-botao-titulo);
@@ -266,9 +282,23 @@ main{
     box-shadow: inset 0 0 10px darkcyan;
 }
 
+.happy{
+    height: 30%;
+    float: right;
+    animation: happy-animation 2s infinite;
+}
+
 @keyframes gold-color-frames {
     0%   {color: gold;}
     25%  {color: #b68303;}
     50%  {color: yellow;}
     100% {color: #e6e610;}
+}
+
+@keyframes happy-animation {
+    0%   {color: gold; transform: translateX(-70%) translateY(-35%); transition-duration: 0.5s;}
+    25%  {color: #b68303;  transform: translateX(-35%) translateY(-70%); transition-duration: 0.5s;}
+    50%  {color: yellow;  transform: translateX(-35%) translateY(-35%); transition-duration: 0.5s;}
+    75% {color: #e6e610;  transform: translateX(-70%) translateY(-70%); transition-duration: 0.5s;}
+    100% {color: #e6e610;  transform: translateX(-70%) translateY(-35%); transition-duration: 0.5s;}
 }
