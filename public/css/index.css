@@ -237,7 +237,7 @@ main{
 }
 
 .button{
-    height: calc(var(--largura-bloco) * 0.5);
+    height: calc(var(--largura-bloco) * 0.35);
     width: calc(var(--largura-bloco) * 0.5);
     float: right;
     margin: calc(var(--largura-bloco) * 0.1);

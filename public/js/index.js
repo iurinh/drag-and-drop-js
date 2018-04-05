@@ -20,6 +20,8 @@
 
     var clearButton = document.querySelector('#clear');
     var refreshButton = document.querySelector('#refresh');
+    var muteOnButton = document.querySelector('#mute-on');
+    var muteOffButton = document.querySelector('#mute-off');
     var initButton = document.querySelector('#botao-somar');
     var newGameButton = document.querySelector('#botao-novo-jogo');
 
@@ -28,6 +30,8 @@
     var primeiraParcela = 0;
     var segundaParcela = 0
     var resultadoFinal = 0;
+
+    var muted = false;
 
     // Funcionalidades
     function validarPosicaoFinal(field, componentMovimentado, event){
@@ -261,6 +265,22 @@
         contar(campoFinal);
     });
 
+    muteOnButton.addEventListener('mousedown', function(event){
+        mute();
+    });
+    
+    muteOnButton.addEventListener('touchstart', function(event){
+        mute();
+    });
+    
+    muteOffButton.addEventListener('mousedown', function(event){
+        mute();
+    });
+    
+    muteOffButton.addEventListener('touchstart', function(event){
+        mute();
+    });
+
     function gerarExpressao(){
         primeiraParcela = gerarNumero();
         segundaParcela = gerarNumero();
@@ -299,6 +319,27 @@
         }, 4000);
     }
 
+    function mute(){
+        document.querySelector('#audio-ambiente').muted = muted = !muted;
+
+        if(muted){
+            document.querySelector('#mute-off').classList.add('hide');
+            document.querySelector('#mute-on').classList.remove('hide');
+        } else {
+            document.querySelector('#mute-on').classList.add('hide');
+            document.querySelector('#mute-off').classList.remove('hide');
+        }
+    }
+    
+    function play(id){
+        document.querySelector('#'+id).play();
+    }
+    
+    function pause(id){
+        document.querySelector('#'+id).pause();
+    }
+
     telaService.redimensionar();
     gerarExpressao();
+    play('audio-ambiente');
 })();
