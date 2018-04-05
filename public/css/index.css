@@ -1,6 +1,6 @@
 :root{
     --largura-bloco: calc(var(--largura) * 0.08);
-    --borda-bloco: calc(var(--largura) * 0.001);
+    --borda-bloco: 1px;
 }
 
 @font-face {
@@ -22,6 +22,20 @@ main{
     height: var(--altura);
     border: 1px solid #000;
     background: radial-gradient(#4df0f5, #32adb1, #2f989b);
+}
+
+.tela-inicial{
+    background: radial-gradient(#4df0f5, #32adb1, #2f989b);
+    margin: auto;
+    width: var(--largura);
+    height: var(--altura);
+}
+
+.tela-parabens{
+    background: radial-gradient(#4df0f5, #32adb1, #2f989b);
+    margin: auto;
+    width: var(--largura);
+    height: var(--altura);
 }
 
 .component{
@@ -167,14 +181,14 @@ main{
     border: var(--borda-bloco) solid darkgoldenrod;
 }
 .plataforma .tira .bloco{
-    border: calc(var(--borda-bloco) * 0.7) solid goldenrod;
+    border: var(--borda-bloco) solid goldenrod;
     height: calc(var(--largura-bloco) * 0.095);
     width: calc(var(--largura-bloco) * 0.095);
     float: none;
 }
 .plataforma-minimizada{
     background-color: gold;
-    border: calc(var(--largura-bloco) * 0.04) solid goldenrod;
+    border: var(--borda-bloco) solid goldenrod;
     box-sizing: border-box;
     height: calc(var(--largura-bloco) * 0.25);
     width: calc(var(--largura-bloco) * 0.25);
@@ -183,7 +197,7 @@ main{
 }
 .tira-minimizada{
     background-color: gold;
-    border: calc(var(--largura-bloco) * 0.01) solid goldenrod;
+    border: var(--borda-bloco) solid goldenrod;
     box-sizing: border-box;
     height: calc(var(--largura-bloco) * 0.7);
     width: calc(var(--largura-bloco) * 0.15);
@@ -191,39 +205,7 @@ main{
     float: left;
 }
 
-.tela-inicial{
-    display: flex;
-    position: absolute;
-    background-color: greenyellow;
-    width: 100%;
-    height: 100%;
-}
-
-.tela-parabens{
-    display: flex;
-    position: absolute;
-    background-color: coral;
-    width: 100%;
-    height: 100%;
-}
-
 .titulo{
-    margin: auto;
-}
-
-.botao-somar{
-    height: 50px;
-    width: 300px;
-    background-color: darkcyan;
-    border-radius: 10%;
-    margin: auto;
-}
-
-.botao-novo-jogo{
-    height: 50px;
-    width: 300px;
-    background-color: darkcyan;
-    border-radius: 10%;
     margin: auto;
 }
 
@@ -254,4 +236,39 @@ main{
 .lixeira{
     background: none;
     box-shadow: none;
+}
+
+.titulo-inicial{
+    animation: gold-color-frames 2s infinite;
+    text-align: center;
+    height: 50%;
+    padding: 2em;
+    box-sizing: border-box;
+    font-size: var(--tamanho-fonte-titulo);
+    text-shadow: 0 0 3px goldenrod;
+}
+
+.botao-tela-inicial{
+    height: var(--altura-botao-titulo);
+    width: var(--largura-botao-titulo);
+    background-color: darkcyan;
+    border-radius: 10%;
+    margin: auto;
+    float: unset;
+    font-size: var(--tamanho-fonte-botao-titulo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Soft_Marshmallow";
+}
+
+.botao-tela-inicial:hover{
+    box-shadow: inset 0 0 10px darkcyan;
+}
+
+@keyframes gold-color-frames {
+    0%   {color: gold;}
+    25%  {color: #b68303;}
+    50%  {color: yellow;}
+    100% {color: #e6e610;}
 }

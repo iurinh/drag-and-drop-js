@@ -209,7 +209,8 @@
 
         if(resultadoFinal == resultado){
             document.querySelector('#resultado').innerHTML = resultadoFinal;
-            document.querySelector('#tela-parabens').classList.remove('hide');
+            show('#tela-parabens');
+            hide('main');
         } else
             document.querySelector('#resultado').innerHTML = '';
     }
@@ -235,9 +236,6 @@
     }
 
     function limparCampos(){
-        if(estaLimiteCentena())
-            
-
         campoFinalUnidade.innerHTML = '';
         campoFinalDezena.innerHTML = '';
         campoFinalCentena.innerHTML = '';
@@ -301,21 +299,32 @@
     }
 
     initButton.addEventListener('mousedown', function(){
-        document.querySelector('#tela-inicial').classList.add('hide');
+        hide('#tela-inicial');
+        show('main');
+        
+        play('audio-ambiente');
+    });
+    
+    initButton.addEventListener('touchstart', function(){
+        hide('#tela-inicial');
+        show('main');
+        
+        play('audio-ambiente');
     });
 
     newGameButton.addEventListener('mousedown', function(){
         limparCampos();
         gerarExpressao();
         contar(campoFinal);
-        document.querySelector('#tela-parabens').classList.add('hide');
+        hide('#tela-parabens');
     });
 
     function mostrarMensagem(msg){
         document.querySelector('#mensagem').innerHTML = msg;
-        document.querySelector('#popup').classList.remove('hide');
+        show('#popup');
+
         setTimeout(function(){
-            document.querySelector('#popup').classList.add('hide');
+            hide('#popup');
         }, 4000);
     }
 
@@ -323,11 +332,11 @@
         document.querySelector('#audio-ambiente').muted = muted = !muted;
 
         if(muted){
-            document.querySelector('#mute-off').classList.add('hide');
-            document.querySelector('#mute-on').classList.remove('hide');
+            hide('#mute-off');
+            show('#mute-on');
         } else {
-            document.querySelector('#mute-on').classList.add('hide');
-            document.querySelector('#mute-off').classList.remove('hide');
+            hide('#mute-on');
+            show('#mute-off');
         }
     }
     
@@ -339,7 +348,19 @@
         document.querySelector('#'+id).pause();
     }
 
+    function hide(selector){
+        document.querySelector(selector).classList.add('hide');
+    }
+    
+    function show(selector){
+        document.querySelector(selector).classList.remove('hide');
+    }
+
     telaService.redimensionar();
     gerarExpressao();
-    play('audio-ambiente');
+
+    hide('main');
+    hide('#tela-parabens')
+    hide('#audio-ambiente');
+
 })();

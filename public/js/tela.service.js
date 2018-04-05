@@ -14,6 +14,10 @@ function _redimensionar(){
         var classRoot = ':root{'
             + '--altura: ' + parseInt(size.altura) + 'px;'
             + '--largura: ' + parseInt(size.largura) + 'px;'
+            + '--tamanho-fonte-titulo: ' + parseInt(size.altura*0.15) + 'px;'
+            + '--tamanho-fonte-botao-titulo: ' + parseInt(size.altura*0.05) + 'px;'
+            + '--altura-botao-titulo: ' + parseInt(size.altura*0.10) + 'px;'
+            + '--largura-botao-titulo: ' + parseInt(size.largura*0.30) + 'px;'
         + '}';
 
         if(!style){
