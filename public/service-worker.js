@@ -1,26 +1,17 @@
-let versao = 3;
+let versao = 12;
 
 let arquivos = [
     "/",
-    'index.js',
-    'app/common/drag-drop.service.js',
-    'app/common/file.service.js',
-    'app/common/html.service.js',
-    'app/common/tag.service.js',
-    'app/components/bloco/bloco.controller.js',
-    'app/components/bloco/bloco.style.css',
-    'app/components/bloco/bloco.view.html',
-    'app/components/bloqueador/bloqueador.controller.js',
-    'app/components/bloqueador/bloqueador.style.css',
-    'app/components/bloqueador/bloqueador.view.html',
-    'app/components/tira/tira.controller.js',
-    'app/components/tira/tira.style.css',
-    'app/components/tira/tira.view.html',
-    'app/main/main.constant.js',
-    'app/main/main.tag.js',
-    'css/index.css',
-    'css/reset.css',
-    'img/logo-the-bitwise-life.png'
+    "audio/Música+Ambiente+drag-and-drop.mp3",
+    "css/index.css",
+    "css/reset.css",
+    "font/Soft_Marshmallow.otf",
+    "img/logo-the-bitwise-life.png",
+    "js/drag-drop.service.js",
+    "js/index.js",
+    "js/register.js",
+    "js/tag.service.js",
+    "js/tela.service.js"
 ]
 
 self.addEventListener("install", function(){

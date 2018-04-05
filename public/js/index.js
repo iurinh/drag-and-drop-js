@@ -266,18 +266,22 @@
     });
 
     muteOnButton.addEventListener('mousedown', function(event){
+        event.stopPropagation();
         mute();
     });
     
     muteOnButton.addEventListener('touchstart', function(event){
+        event.stopPropagation();
         mute();
     });
     
     muteOffButton.addEventListener('mousedown', function(event){
+        event.stopPropagation();
         mute();
     });
     
     muteOffButton.addEventListener('touchstart', function(event){
+        event.stopPropagation();
         mute();
     });
 
@@ -317,8 +321,9 @@
     newGameButton.addEventListener('mousedown', function(){
         limparCampos();
         gerarExpressao();
-        contar(campoFinal);
         hide('#tela-parabens');
+        show('main');
+        contar(campoFinal);
     });
 
     function mostrarMensagem(msg){
