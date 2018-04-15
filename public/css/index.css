@@ -252,16 +252,15 @@ main{
     animation: gold-color-frames 2s infinite;
     text-align: center;
     height: 50%;
-    padding: 2em;
     box-sizing: border-box;
-    font-size: var(--tamanho-fonte-titulo);
+    font-size: calc(var(--tamanho-fonte-titulo) * 1.5);
     text-shadow: 0 0 3px goldenrod;
-    transform: translateX(-15%) translateY(-10%) rotate(-30deg);
+    transform: translateX(-20%) translateY(35%) rotate(-30deg);
 }
 
 .resultado-parabens{
-    transform: translateY(-85%);
-    text-align: center;
+    transform: translateY(-50%) translateX(calc(var(--tamanho-fonte-titulo) * 3));
+    margin-top: var(--tamanho-fonte-titulo);
 }
 
 .botao-tela-inicial{

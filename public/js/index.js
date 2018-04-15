@@ -214,7 +214,9 @@
             show('#tela-parabens');
             hide('main');
         } else
-            document.querySelector('#resultado').innerHTML = '';
+            document.querySelectorAll('#resultado').forEach(function(res){
+                res.innerHTML = "";
+            });
     }
 
     // Inicializadores
@@ -296,12 +298,17 @@
             return;
         }
 
-        document.querySelector('#primeira-parcela').innerHTML = primeiraParcela;
-        document.querySelector('#segunda-parcela').innerHTML = segundaParcela;
+        document.querySelectorAll('#primeira-parcela').forEach(function(parcela){
+            parcela.innerHTML = primeiraParcela;
+        });
+        document.querySelectorAll('#segunda-parcela').forEach(function(parcela){
+            parcela.innerHTML = segundaParcela;
+        });
     }
 
     function gerarNumero(){
-        return parseInt(Math.random() * 1000) - 1;
+        var numero = parseInt(Math.random() * 1000) - 1;
+        return numero > 0 ? numero : gerarNumero();
     }
 
     initButton.addEventListener('mousedown', function(){
@@ -319,10 +326,10 @@
     });
 
     newGameButton.addEventListener('mousedown', function(){
-        limparCampos();
-        gerarExpressao();
         hide('#tela-parabens');
         show('main');
+        limparCampos();
+        gerarExpressao();
         contar(campoFinal);
     });
 
