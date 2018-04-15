@@ -2,7 +2,7 @@ let versao = 1;
 
 let arquivos = [
     "/",
-    "audio/Musica-Ambiente-drag-and-drop.mp3",
+    "audio/Musica-Ambiente-conta-dourada.mp3",
     "css/index.css",
     "css/reset.css",
     "font/Soft_Marshmallow.otf",
